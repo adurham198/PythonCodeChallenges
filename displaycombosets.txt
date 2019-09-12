@@ -1,0 +1,97 @@
+//anton Durham
+//Program designed to display binary number
+
+#include "stdafx.h"
+#include "string"
+#include "iostream"
+#include "vector"
+using namespace std;
+
+vector<string> getnumbers(int);
+vector<string> getbinary(int, int);
+void displayComboMeals(vector<string>, vector<string>, int, int);
+
+int main()
+{
+	int endpoint = 0;
+	int possibilities = 0;
+	vector<string> set;
+	vector<string> binary;
+	cout << "Enter your desired endpoint: ";
+	cin >> endpoint;
+	possibilities = pow(2, endpoint);
+	cout << "There " << possibilities << " different subsets between 1 and " << endpoint << ": ";
+	binary = getbinary(possibilities, endpoint);
+	set = getnumbers(endpoint);
+	displayComboMeals(set, binary, possibilities, endpoint);
+
+	system("Pause");
+	return 0;
+}
+
+vector<string> getnumbers(int p)
+{
+	int size = 0;
+	vector<string> set{ 1 };
+	for (int i = 0; i < p; i++)
+	{
+		set.resize(set.size() + 1);
+		set[i] = to_string(i + 1);
+	}
+	return set;
+}
+
+vector<string> getbinary(int p, int e)
+{
+	int size = 0;
+	vector<string> bSet{ 1 };
+	for (int i = 0; i < p; i++)
+	{
+		bSet.resize(bSet.size() + 1);
+		int decimal = i;
+		string invertedbinary = "";
+		string binary = "";
+		while (decimal > 0)
+		{
+
+			if (decimal % 2 == 1)
+			{
+				invertedbinary += "1";
+			}
+			else if (decimal % 2 == 0)
+			{
+				invertedbinary += "0";
+			}
+			decimal = decimal / 2;
+		}
+		while (invertedbinary.length() < e)
+		{
+			invertedbinary += "0";
+		}
+		for (int j = (invertedbinary.length() - 1); j >= 0; j--)
+		{
+			binary += invertedbinary[j];
+		}
+		bSet[i] = binary;
+	}
+	return bSet;
+}
+
+void displayComboMeals(vector<string> set, vector<string> binary, int p, int e)
+{
+	for (int i = 0; i < p; i++)
+	{
+		string section = binary[i];
+		cout << "{";
+		for (int j = 0; j < section.length(); j++)
+		{
+			if (section.at(j) == '1')
+			{
+				cout << set[j] + "";
+			}
+		}
+		cout << "} ";
+	}
+}
+
+
