@@ -1,0 +1,25 @@
+#Anton Durham
+#10/05/2019
+#Desc: This is a script designed to take a string in and separate strings into multiple words such that each
+#line has a length of k or less. Each line has to have the max possible amount of words. We can assume that each line has to
+#have the maximum possible amount of words.
+
+
+import re
+def main():
+    str1 = "the quick brown fox slightly jumps over the lazy dog"
+    #string to be parsed
+    length = input("Enter the number of spaces each word will need")
+    l1 = []
+    for i in range(len(str1)):
+        l1.append(re.search(r'(?<=-)\w+', str1))
+        #add the amount of characters we want to separate by
+    #s = '.'
+    #s = re.sub('(.)', r'\1' * int(length), s)
+    #s = s+ '?! '
+    #print(s)
+    #l1 = re.findall(s, str1)
+    #find all the words and 
+    print(l1)
+    
+main()
